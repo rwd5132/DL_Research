@@ -210,7 +210,7 @@ df_summary = df_summary.append(df_temp, ignore_index=True)
 
 # Visualize performance
 
-plt.figure(3)
+plt.figure(4)
 
 plt.subplot(211)
 plt.plot(history.history['accuracy'])
@@ -268,7 +268,7 @@ df_summary = df_summary.append(df_temp, ignore_index=True)
 
 # Visualize performance
 
-plt.figure(4)
+plt.figure(5)
 
 plt.subplot(211)
 plt.plot(history.history['accuracy'])
@@ -328,7 +328,7 @@ df_summary = df_summary.append(df_temp, ignore_index=True)
 
 # Visualize performance
 
-plt.figure(5)
+plt.figure(6)
 
 plt.subplot(211)
 plt.plot(history.history['accuracy'])
@@ -420,7 +420,7 @@ df_summary = df_summary.append(df_temp, ignore_index=True)
 
 # Visualize performance
 
-plt.figure(6)
+plt.figure(7)
 
 plt.subplot(211)
 plt.plot(history.history['accuracy'])
@@ -439,6 +439,21 @@ plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
 
+fig_num = 0
+for x in range(1000):
+    if fig_num < 9:
+        test_image = test_images[x,:].reshape(1, 28, 28, 1)
+        predicted_cat = model.predict(test_image).argmax()
+        label = test_labels[x].argmax()
+        if (predicted_cat != label):        
+            plt.subplot(330 + 1 + fig_num)
+            #plt.figure(fig_num)
+            plt.title('CNN Prediction: %d Label: %d' % (predicted_cat, label))
+            plt.subplots_adjust(hspace=0.4)
+            plt.imshow(test_image.reshape([28,28]), cmap=plt.get_cmap('gray_r'))
+            #plt.show()
+            fig_num = fig_num + 1
+            
 #%% Display Summary Dataframe
 print(df_summary)
 
